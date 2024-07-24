@@ -7,20 +7,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.historydate.hd.dto.CenturyDto;
-import ru.historydate.hd.dto.HistoryDateDto;
-import ru.historydate.hd.entity.Century;
-import ru.historydate.hd.service.CenturyService;
+import ru.historydate.hd.dto.PeriodDto;
+import ru.historydate.hd.service.PeriodService;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/centuries")
-public class CenturyController {
-    private CenturyService centuryService;
+@RequestMapping("/periods")
+public class PeriodController {
+    private PeriodService periodService;
 
     @PostMapping
-    public ResponseEntity<CenturyDto> createHistoryDate(@RequestBody CenturyDto century) {
-        CenturyDto created = centuryService.createCentury(century);
+    public ResponseEntity<PeriodDto> createHistoryDate(@RequestBody PeriodDto century) {
+        PeriodDto created = periodService.createCentury(century);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 }

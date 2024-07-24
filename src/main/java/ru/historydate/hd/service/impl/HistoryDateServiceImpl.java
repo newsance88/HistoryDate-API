@@ -5,15 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.historydate.hd.Exception.ResourceNotFoundException;
 import ru.historydate.hd.dto.HistoryDateDto;
-import ru.historydate.hd.entity.Century;
+import ru.historydate.hd.entity.Period;
 import ru.historydate.hd.entity.HistoryDate;
 import ru.historydate.hd.mapper.HistoryDateMapper;
-import ru.historydate.hd.repository.CenturyRepository;
+import ru.historydate.hd.repository.PeriodRepository;
 import ru.historydate.hd.repository.HistoryDateRepository;
 import ru.historydate.hd.service.HistoryDateService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,14 +21,14 @@ import java.util.stream.Collectors;
 public class HistoryDateServiceImpl implements HistoryDateService {
 
     private final HistoryDateRepository historyDateRepository;
-    private final CenturyRepository centuryRepository;
+    private final PeriodRepository periodRepository;
 
     @Override
     public HistoryDateDto createHistoryDate(HistoryDateDto historyDateDto) {
-        Century century = centuryRepository.findById(historyDateDto.getCenturyId())
+        Period period = periodRepository.findById(historyDateDto.getCenturyId())
                 .orElseThrow(() -> new RuntimeException("Century not found"));
 
-        HistoryDate historyDate = HistoryDateMapper.mapToHd(historyDateDto, century);
+        HistoryDate historyDate = HistoryDateMapper.mapToHd(historyDateDto, period);
         HistoryDate savedHistoryDate = historyDateRepository.save(historyDate);
 
         log.info("Дата создана: {}", savedHistoryDate);
@@ -43,7 +42,7 @@ public class HistoryDateServiceImpl implements HistoryDateService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("History date not found with id:" + HistoryDateId));
 
-        Century century = centuryRepository.findById(historyDateDto.getCenturyId())
+        Period period = periodRepository.findById(historyDateDto.getCenturyId())
                 .orElseThrow(() -> new ResourceNotFoundException("Century date not found with id:" + historyDateDto.getCenturyId()));
 
         historyDateToUpdate.setBeginningYear(historyDateDto.getBeginningYear());
@@ -53,9 +52,11 @@ public class HistoryDateServiceImpl implements HistoryDateService {
         historyDateToUpdate.setEndingMonth(historyDateDto.getEndingMonth());
         historyDateToUpdate.setEndingDay(historyDateDto.getEndingDay());
         historyDateToUpdate.setDescription(historyDateDto.getDescription());
-        historyDateToUpdate.setCentury(century);
+        historyDateToUpdate.setPeriod(period);
 
         HistoryDate updatedHistoryDate = historyDateRepository.save(historyDateToUpdate);
+        log.info("Дата обновлена: {}", updatedHistoryDate);
+
         return HistoryDateMapper.mapToDto(updatedHistoryDate);
 
     }
@@ -67,6 +68,8 @@ public class HistoryDateServiceImpl implements HistoryDateService {
                         new ResourceNotFoundException("History date not found with id:" + id));
 
         historyDateRepository.deleteById(id);
+        log.info("Дата удалена: {}", historyDate);
+
         return HistoryDateMapper.mapToDto(historyDate);
     }
 
@@ -75,12 +78,16 @@ public class HistoryDateServiceImpl implements HistoryDateService {
         HistoryDate historyDate = historyDateRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("History date not found with id:" + id));
+        log.info("Дата получена: {}", historyDate);
+
         return HistoryDateMapper.mapToDto(historyDate);
     }
 
     @Override
     public List<HistoryDateDto> getAllHistoryDates() {
         List<HistoryDate> historyDates = historyDateRepository.findAll();
+        log.info("Получение всех дам");
+
         return historyDates.stream()
                 .map(HistoryDateMapper::mapToDto)
                 .collect(Collectors.toList());

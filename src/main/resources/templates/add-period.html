@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Period</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Add Period</h1>
+    <form th:action="@{/web/period/form}" th:object="${periodDto}" method="post">
+        <div class="form-group">
+            <label for="centuryName">Century Name</label>
+            <input type="text" class="form-control" id="centuryName" th:field="*{centuryName}" required>
+        </div>
+        <div class="form-group">
+            <label for="centuryYearBeginning">Century Year Beginning</label>
+            <input type="number" class="form-control" id="centuryYearBeginning" th:field="*{centuryYearBeginning}" required>
+        </div>
+        <div class="form-group">
+            <label for="centuryYearEnding">Century Year Ending</label>
+            <input type="number" class="form-control" id="centuryYearEnding" th:field="*{centuryYearEnding}" required>
+        </div>
+        <div class="form-group">
+            <label for="ourEra">Our Era</label>
+            <select class="form-control" id="ourEra" th:field="*{ourEra}" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/web/list" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

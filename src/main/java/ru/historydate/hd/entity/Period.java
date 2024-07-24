@@ -1,16 +1,19 @@
 package ru.historydate.hd.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "centuries")
-public class Century {
+@Table(name = "periods")
+public class Period {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

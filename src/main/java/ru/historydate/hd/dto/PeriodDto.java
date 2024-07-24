@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CenturyDto {
+public class PeriodDto {
     private Long id;
     private String centuryName;
     private int centuryYearBeginning;

@@ -1,6 +1,6 @@
 package ru.historydate.hd.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +30,5 @@ public class HistoryDate {
     private String description;
     @ManyToOne
     @JoinColumn(name = "century_id", referencedColumnName = "id")
-    private Century century;
+    private Period period;
 }

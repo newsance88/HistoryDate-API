@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update History Date</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Update History Date</h1>
+    <form th:action="@{/web/update}" th:object="${historyDateDto}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="form-group">
+            <label for="beginningYear">Beginning Year</label>
+            <input type="number" class="form-control" id="beginningYear" th:field="*{beginningYear}" required>
+        </div>
+        <div class="form-group">
+            <label for="beginningMonth">Beginning Month</label>
+            <input type="number" class="form-control" id="beginningMonth" th:field="*{beginningMonth}" required>
+        </div>
+        <div class="form-group">
+            <label for="beginningDay">Beginning Day</label>
+            <input type="number" class="form-control" id="beginningDay" th:field="*{beginningDay}" required>
+        </div>
+        <div class="form-group">
+            <label for="endingYear">Ending Year</label>
+            <input type="number" class="form-control" id="endingYear" th:field="*{endingYear}">
+        </div>
+        <div class="form-group">
+            <label for="endingMonth">Ending Month</label>
+            <input type="number" class="form-control" id="endingMonth" th:field="*{endingMonth}">
+        </div>
+        <div class="form-group">
+            <label for="endingDay">Ending Day</label>
+            <input type="number" class="form-control" id="endingDay" th:field="*{endingDay}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" th:field="*{description}" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="centuryId">Century</label>
+            <select class="form-control" id="centuryId" th:field="*{centuryId}" required>
+                <option th:each="period : ${centuries}" th:value="${period.id}" th:text="${period.centuryName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/web/list" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

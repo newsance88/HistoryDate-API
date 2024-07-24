@@ -1,7 +1,7 @@
 package ru.historydate.hd.mapper;
 
 import ru.historydate.hd.dto.HistoryDateDto;
-import ru.historydate.hd.entity.Century;
+import ru.historydate.hd.entity.Period;
 import ru.historydate.hd.entity.HistoryDate;
 
 public class HistoryDateMapper {
@@ -16,11 +16,12 @@ public class HistoryDateMapper {
                 historyDate.getEndingMonth(),
                 historyDate.getEndingDay(),
                 historyDate.getDescription(),
-                historyDate.getCentury() != null ? historyDate.getCentury().getId() : null
+                historyDate.getPeriod() != null ? historyDate.getPeriod().getId() : null,
+                historyDate.getPeriod().getCenturyName()
         );
     }
 
-    public static HistoryDate mapToHd(HistoryDateDto historyDateDto, Century century) {
+    public static HistoryDate mapToHd(HistoryDateDto historyDateDto, Period period) {
         return new HistoryDate(
                 historyDateDto.getId(),
                 historyDateDto.getBeginningYear(),
@@ -30,7 +31,7 @@ public class HistoryDateMapper {
                 historyDateDto.getEndingMonth(),
                 historyDateDto.getEndingDay(),
                 historyDateDto.getDescription(),
-                century
+                period
         );
     }
 }

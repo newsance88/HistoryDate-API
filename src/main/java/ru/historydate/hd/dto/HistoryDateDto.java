@@ -17,4 +17,5 @@ public class HistoryDateDto {
     private int endingDay;
     private String description;
     private Long centuryId;
+    private String centuryName; // New field
 }

@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Generated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.historydate.hd.dto.HistoryDateDto;
 import ru.historydate.hd.entity.HistoryDate;
 import ru.historydate.hd.service.HistoryDateService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -29,6 +32,7 @@ public class HistoryDateController {
         List<HistoryDateDto> historyDateDtos = historyDateService.getAllHistoryDates();
         return new ResponseEntity<>(historyDateDtos, HttpStatus.OK);
     }
+
 
     @GetMapping("{id}")
     public ResponseEntity<HistoryDateDto> getHistoryDateById(@PathVariable("id") Long id) {
