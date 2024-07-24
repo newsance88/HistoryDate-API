@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/dates")
 public class HistoryDateController {
-    
+
     private HistoryDateService historyDateService;
 
     @PostMapping

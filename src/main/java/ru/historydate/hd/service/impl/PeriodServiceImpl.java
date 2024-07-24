@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class PeriodServiceImpl implements PeriodService {
     private final PeriodRepository periodRepository;
+
     @Override
     public PeriodDto createCentury(PeriodDto centurydto) {
         Period period = PeriodMapper.mapFromDtoToCentury(centurydto);

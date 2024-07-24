@@ -13,6 +13,7 @@ public class PeriodMapper {
                 periodDto.getOurEra()
         );
     }
+
     public static PeriodDto mapCenturyToDto(Period period) {
         return new PeriodDto(
                 period.getId(),

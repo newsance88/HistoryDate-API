@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface PeriodService {
     public PeriodDto createCentury(PeriodDto century);
+
     public PeriodDto getCenturyById(Long id);
+
     public List<PeriodDto> getAllCentury();
 }

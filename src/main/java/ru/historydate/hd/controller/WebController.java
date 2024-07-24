@@ -69,6 +69,7 @@ public class WebController {
         historyDateService.updateHistoryDate(historyDateDto.getId(), historyDateDto);
         return new ModelAndView("redirect:/web/list");
     }
+
     @PostMapping("/delete/{id}")
     public ModelAndView deleteHistoryDate(@PathVariable Long id) {
         historyDateService.deleteHistoryDateById(id);
